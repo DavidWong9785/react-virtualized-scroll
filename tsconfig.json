@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib",
+    // "sourceMap": true,
+    "noImplicitAny": false, //在表达式和声明上有隐含的 any类型时报错。
+    "target": "es5", //指定ECMAScript目标版本 "ES3"（默认）
+    "lib": ["dom", "dom.iterable", "esnext"], //    编译过程中需要引入的库文件的列表
+    "allowJs": true, //允许编译javascript文件。
+    "skipLibCheck": true, //忽略所有的声明文件（ *.d.ts）的类型检查
+    "esModuleInterop": true, //允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查
+    "allowSyntheticDefaultImports": true, // 同上
+    "strict": true, //启用所有严格类型检查选项
+    "forceConsistentCasingInFileNames": true, //禁止对同一个文件的不一致的引用
+    "module": "commonjs", //指定生成哪个模块系统代码
+    "moduleResolution": "node", //决定如何处理模块。
+    "resolveJsonModule": true,
+    "isolatedModules": false, //将每个文件作为单独的模块（与“ts.transpileModule”类似）。
+    // "noEmit": true,//不生成输出文件
+    "jsx": "react",
+    "baseUrl": "./",
+    "paths": { "*": ["types/*"] }
+    // "suppressImplicitAnyIndexErrors": true, //阻止对缺少索引签名的索引对象报错
+  },
+  "exclude": ["node_modules"],
+  "include": ["src/**/*"]
+}

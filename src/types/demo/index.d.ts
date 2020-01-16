@@ -1,0 +1,3 @@
+interface IDemo {
+    age: number
+}

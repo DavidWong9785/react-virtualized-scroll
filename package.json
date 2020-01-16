@@ -1,0 +1,66 @@
+{
+  "name": "react-virtualized-scroll",
+  "version": "0.0.1",
+  "description": "虚拟滚动搭配上拉下滑加载的scroll组件",
+  "main": "lib/index.js",
+  "homepage": "https://github.com/DavidWong9785/react-virtualized-scroll",
+  "scripts": {
+    "start": "webpack-dev-server --open development",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "test": "jest --config jestconfig.json --coverage"
+  },
+  "keywords": [
+    "typescript",
+    "虚拟滚动",
+    "scroll",
+    "react"
+  ],
+  "author": "DavidWong <park_geunhye@163.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidWong9785/react-virtualized-scroll.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@types/html-webpack-plugin": "^3.2.1",
+    "@types/node": "^12.6.8",
+    "@types/react": "^16.8.20",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-router-dom": "^4.3.4",
+    "@types/react-virtualized": "^9.21.7",
+    "@types/webpack": "^4.32.1",
+    "media-show-card": "^1.0.3",
+    "pre-commit": "^1.2.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
+    "react-virtualized": "^9.21.2",
+    "ts-node": "^8.3.0"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^3.10.3",
+    "@types/jest": "^24.0.16",
+    "babel-jest": "^24.9.0",
+    "css-loader": "^3.1.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "file-loader": "^4.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^0.23.1",
+    "ts-jest": "^24.0.2",
+    "ts-loader": "^6.0.3",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.5.2",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4",
+    "webpack-dev-server": "^3.7.2"
+  }
+}

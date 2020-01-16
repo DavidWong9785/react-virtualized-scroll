@@ -1,0 +1,11 @@
+{
+  "transform": {
+    "^.+\\.(t|j)sx?$": "ts-jest",
+    "^.+\\.jsx?$": "babel-jest"
+  },
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+  "moduleFileExtensions": ["tsx", "ts", "js", "jsx", "json", "node"],
+  "moduleNameMapper": {
+    "\\.(s?css|less)$": "identity-obj-proxy"
+  }
+}
