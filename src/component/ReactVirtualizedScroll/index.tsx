@@ -1,3 +1,3 @@
 import ReactVirtualizedScroll from './ReactVirtualizedScroll'
 
-export ReactVirtualizedScroll
+export default ReactVirtualizedScroll
