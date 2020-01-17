@@ -1,6 +1,8 @@
 # react-virtualized-scroll
 虚拟滚动搭配上拉下滑加载的scroll组件
 
+![avatar](./test.gif)
+
 ### 简介
 
 - 搭配 ts 和 react-hooks 编写的虚拟滚动组件
