@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react'
-import { ReactVirtualizedScroll } from '../../lib/component/ReactVirtualizedScroll/index.js'
-// import { ReactVirtualizedScroll } from '../../src/component/ReactVirtualizedScroll/index.tsx'
+import ReactVirtualizedScroll from '../../lib/component/ReactVirtualizedScroll/index.js'
+// import ReactVirtualizedScroll from '../../src/component/ReactVirtualizedScroll/index.tsx'
 import { loading_pullup } from '../../src/component/ReactVirtualizedScroll/svg'
 
 const initState = [{
