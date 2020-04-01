@@ -1,6 +1,6 @@
 {
   "name": "react-virtualized-scroll",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "虚拟滚动搭配上拉下滑加载的scroll组件",
   "main": "./component/ReactVirtualizedScroll/index.js",
   "author": "DavidWong <park_geunhye@163.com>",
