@@ -1,8 +1,8 @@
 import React from 'react'
 import { shallow, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import ReactVirtualizedScroll from '../component/ReactVirtualizedScroll/index'
-
+import rvs from '../component/ReactVirtualizedScroll/index'
+const { ReactVirtualizedScroll } = rvs
 configure({ adapter: new Adapter() })
 
 const setup = () => {

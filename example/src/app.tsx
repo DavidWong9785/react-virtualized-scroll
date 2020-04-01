@@ -1,7 +1,9 @@
 import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react'
-import ReactVirtualizedScroll from '../../lib/component/ReactVirtualizedScroll/index.js'
+import rvs from '../../lib/component/ReactVirtualizedScroll/index.js'
 // import ReactVirtualizedScroll from '../../src/component/ReactVirtualizedScroll/index.tsx'
 import { loading_pullup } from '../../src/component/ReactVirtualizedScroll/svg'
+
+const { ReactVirtualizedScroll, useStateAndRef } = rvs
 
 const initState = [{
     key: 1,
@@ -21,7 +23,8 @@ const initState = [{
 }]
 
 const example = () => {
-    const [data, setData] = useState(initState)
+    const [data, setData, dataRef] = useStateAndRef(initState)
+
     const [hasMore, setHasMore] = useState(true)
     const info = {
         title: 'VirtualizedScroll',
@@ -54,7 +57,7 @@ const example = () => {
                         }
                         setData(data.concat(target))
                         resolve()
-                    }, 300);
+                    }, 3000);
                 }
             })
         },
@@ -75,29 +78,34 @@ const example = () => {
         pullup_loading:  <img src={loading_pullup}/>,
         pullup_success: '没有更多了',
     }
-    const Row = ({ index, info }: any, data: any) => {
-        return (
-            <div style={{
-                width: '100vw',
-                height: '200px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-                background: '#6495ED',
-                color: '#fff',
-                marginBottom: '10px'
-            }}>
-                <p>{ info.title } - { data[index].value }</p>
-                <p>{ info.desc }</p>
-            </div>
-        )
-    }
+    const countAdd = ((index: number) => {
+        const newData = dataRef.current
+        newData[index].value += 100
+        setData(JSON.parse(JSON.stringify(newData)))
+    })
+
+    const Row = ((args: any) => {
+        const {index, info, data} = args
+        return <div style={{
+            width: '100vw',
+            height: '200px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            background: '#6495ED',
+            color: '#fff',
+            marginBottom: '10px'
+        }}
+        onClick={() => countAdd(index)}>
+            <p>{ info.title } - { data[index].value }</p>
+            <p>{ info.desc }</p>
+        </div>
+    })
 
     return (
         <div>
             <ReactVirtualizedScroll
-                onPullDown={handlePullDown}
                 onPullUp={handlePullUp}
                 hasMore={hasMore}
                 data={data}

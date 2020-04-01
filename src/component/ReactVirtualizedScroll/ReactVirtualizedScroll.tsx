@@ -25,7 +25,13 @@ interface IVirtualized {
   onPullUp? : any;
   onPullDown? : any;
   onScroll?: any;
-  row({index, info}: {index: number, info: any}, data: any): any;
+  row({index, info}: {index: number, info: any, data: any}): any;
+}
+
+const Row = ({ row, data, index, info }:any) => {
+  return useMemo(() => {
+      return row({ data: data, index, info })
+  }, [JSON.stringify(data[index])])
 }
 
 const VirtualizedScroll = ({
@@ -38,9 +44,9 @@ const VirtualizedScroll = ({
   height = '100vh',
   width = '100vw',
   noDataRow,
-  onPullDown,
-  onPullUp,
-  onScroll,
+  onPullDown = null,
+  onPullUp = null,
+  onScroll = null,
   row,
   logo = {}
 }: IVirtualized, ref: any) => {
@@ -58,13 +64,14 @@ const VirtualizedScroll = ({
   
   const hasMoreRef = useRef(true)
   const canNotDrag = useRef(false)
+  const isPullUpLoading = useRef(false)
 
   useEffect(() => {
     hasMoreRef.current = hasMore
   }, [hasMore])
 
   useEffect(() => {
-    canNotDrag.current = STATS === 'refreshing' || STATS === 'success' || STATS == 'scroll'
+    canNotDrag.current = STATS === 'refreshing' || STATS === 'success' || STATS == 'scroll' || !onPullDown
   }, [STATS])
 
   const initState = () => {
@@ -129,7 +136,15 @@ const VirtualizedScroll = ({
     if (scrollTop === 0) scrollingDisable.current = false
     else scrollingDisable.current = true
 
-    if ((clientHeight + scrollTop === scrollHeight) && onPullUp) onPullUp()
+    if ((clientHeight + scrollTop === scrollHeight) && onPullUp && !isPullUpLoading.current) {
+      isPullUpLoading.current = true
+      onPullUp().then(() => {
+        isPullUpLoading.current = false
+        vListRef.current.scrollToRow(data.length + 1)
+      }).catch(() => {
+        isPullUpLoading.current = false
+      })
+    }
     if (onScroll) onScroll(clientHeight, scrollTop, scrollHeight)
   }
 
@@ -154,9 +169,12 @@ const VirtualizedScroll = ({
           rowIndex={index}>
           <div className="card-content" style={ { ...style } } key={key}>
             {
-              row({
-                index, info
-              }, data)
+              <Row
+                row={row}
+                data={data}
+                index={index}
+                info={info}></Row>
+
             }
             {
                 index === data.length - 1 ? !hasMoreRef.current ? 
@@ -174,39 +192,40 @@ const VirtualizedScroll = ({
           </div>
         </CellMeasurer>
       )
-    },
-    [data, hasMoreRef],
+    }, [data, hasMoreRef]
   )
 
-  const VirtualScroll = useMemo(() => (
-    <div className="content-wrap" style={{
-        width,
-        height,
-        position: 'relative'
-    }}>
-        { children }
-        {
-          !data.length ? noDataRow ? noDataRow : '' :
-          (
-              <AutoSizer>
-              {
-                  ({ height, width }: any) => (
-                  <VList
-                      ref={(ref: any) => vListRef.current = ref}
-                      onScroll={onScrollCallback}
-                      height={height}
-                      width={width}
-                      rowHeight={cache.rowHeight}
-                      rowCount={data.length}
-                      rowRenderer={renderRow}
-                  />
-                  )
-              }
-              </AutoSizer>
-          )
-        }
-    </div>
-  ), [data])
+  const VirtualScroll = useMemo(() => {
+    return (
+      <div className="content-wrap" style={{
+          width,
+          height,
+          position: 'relative'
+      }}>
+          { children }
+          {
+            !data.length ? noDataRow ? noDataRow : '' :
+            (
+                <AutoSizer>
+                {
+                    ({ height, width }: any) => (
+                    <VList
+                        ref={(ref: any) => vListRef.current = ref}
+                        onScroll={onScrollCallback}
+                        height={height}
+                        width={width}
+                        rowHeight={cache.rowHeight}
+                        rowCount={data.length}
+                        rowRenderer={renderRow}
+                    />
+                    )
+                }
+                </AutoSizer>
+            )
+          }
+      </div>
+    )
+  }, [data])
 
   return (
     <div id="virtualized-scroll-panel" onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
