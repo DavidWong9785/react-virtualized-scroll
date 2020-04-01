@@ -9,6 +9,8 @@ const setup = () => {
     // 模拟 props
     const props = {
         height: '100vh',
+        row: () => {},
+        hasMore: true
     }
     // 通过 enzyme 提供的 shallow(浅渲染) 创建组件
     const wrapper = shallow(<ReactVirtualizedScroll {...props} />)

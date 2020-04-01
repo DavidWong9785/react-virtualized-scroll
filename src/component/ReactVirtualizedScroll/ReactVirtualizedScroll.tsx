@@ -17,18 +17,18 @@ interface IVirtualized {
   refreshDistance? : number;
   loading? : boolean;
   data? : any;
-  info?: any;
-  height?: string;
-  width?: string;
-  noDataRow?: JSX.Element;
+  info? : any;
+  height? : string;
+  width? : string;
+  noDataRow? : JSX.Element;
   logo? : ILogo;
-  onPullUp(): any;
-  onPullDown(): any;
-  onScroll(clientHeight: number, scrollTop: number, scrollHeight: number): any;
+  onPullUp? : any;
+  onPullDown? : any;
+  onScroll?: any;
   row({index, info}: {index: number, info: any}, data: any): any;
 }
 
-const VirtualizedScroll: React.FC<any> = ({
+const VirtualizedScroll = ({
   children,
   hasMore = true,
   refreshDistance = 120,
@@ -45,23 +45,26 @@ const VirtualizedScroll: React.FC<any> = ({
   logo = {}
 }: IVirtualized, ref: any) => {
 
+  // 下拉状态
   const [STATS, setSTATS] = useState<string>('init')
+  // touch数据
   const [startY, setStartY] = useState<number>(0)
   const [offset, setOffset] = useState<number>(0)
+  // vList容器
   const vListRef = useRef<any>()
   const timer = useRef<any>()
-  const disabledTag = useRef(false)
-  const pullingDown = useRef(false)
-  const pullingUp = useRef(false)
+  // 上滑时，scrollTop为0禁止滑动
+  const scrollingDisable = useRef(false)
   
   const hasMoreRef = useRef(true)
+  const canNotDrag = useRef(false)
 
   useEffect(() => {
     hasMoreRef.current = hasMore
   }, [hasMore])
 
-  const cantMove = useMemo(() => {
-    return STATS === 'refreshing' || STATS === 'refreshed'
+  useEffect(() => {
+    canNotDrag.current = STATS === 'refreshing' || STATS === 'success' || STATS == 'scroll'
   }, [STATS])
 
   const initState = () => {
@@ -70,39 +73,37 @@ const VirtualizedScroll: React.FC<any> = ({
   }
 
   const onTouchStart = ($event: TouchEvent) => {
-    if (cantMove || disabledTag.current || pullingDown.current) return
+    if (canNotDrag.current || scrollingDisable.current) return
     setStartY($event.nativeEvent.touches[0].pageY)
   }
+
   const onTouchMove = useCallback(
     ($event: TouchEvent) => {
-      if (cantMove || disabledTag.current || pullingDown.current) return
-      if (!startY) {
-        setStartY($event.nativeEvent.touches[0].pageY)
-        return
-      }
+      if (canNotDrag.current || scrollingDisable.current) return
+
       const offsetComputed = $event.nativeEvent.touches[0].pageY - startY
       if (0 < offsetComputed && offsetComputed <= refreshDistance) setOffset(offsetComputed)
       else if (offsetComputed < 0) setOffset(0)
       else if (offsetComputed > refreshDistance) setOffset(refreshDistance)
   
-      if (offset < refreshDistance && STATS !== 'pull') setSTATS('pull')
-      else if (offset >= refreshDistance) setSTATS('preRefreshing')
+      if (offset < refreshDistance && STATS !== 'dragging') setSTATS('dragging')
+      else if (offset >= refreshDistance) setSTATS('pre-refresh')
     },
-    [startY, cantMove, offset, STATS],
+    [startY, canNotDrag, offset, STATS],
   )
+
   const onTouchEnd = useCallback(
     ($event: TouchEvent) => {
-      if (cantMove || disabledTag.current || pullingDown.current) {
+      if (canNotDrag.current) return
+      if (scrollingDisable.current) {
         initState()
         return
       }
-      if (STATS === 'preRefreshing') {
+      if (STATS === 'pre-refresh') {
         setSTATS('refreshing')
         if (!onPullDown) return
-        pullingDown.current = true
         onPullDown().then(() => {
-          setSTATS('refreshed')
-          pullingDown.current = false
+          setSTATS('success')
           vListRef.current.scrollToRow(0)
           if (timer.current) clearTimeout(timer.current)
           timer.current = setTimeout(() => {
@@ -112,7 +113,7 @@ const VirtualizedScroll: React.FC<any> = ({
         })
       } else {
         initState()
-        setSTATS('pre-init')
+        setSTATS('not-enough')
         if (timer.current) clearTimeout(timer.current)
         timer.current = setTimeout(() => {
           setSTATS('init')
@@ -120,15 +121,15 @@ const VirtualizedScroll: React.FC<any> = ({
       }
   
     },
-    [timer, STATS, cantMove],
+    [timer, STATS, canNotDrag],
   )
 
-  const onScrollCurrent = ({ clientHeight, scrollTop, scrollHeight }: any) => {
-    disabledTag.current = !disabledTag.current
-    if (scrollTop === 0) disabledTag.current = false
-    else disabledTag.current = true
+  const onScrollCallback = ({ clientHeight, scrollTop, scrollHeight }: any) => {
 
-    if ((clientHeight+scrollTop === scrollHeight) && onPullUp) onPullUp()
+    if (scrollTop === 0) scrollingDisable.current = false
+    else scrollingDisable.current = true
+
+    if ((clientHeight + scrollTop === scrollHeight) && onPullUp) onPullUp()
     if (onScroll) onScroll(clientHeight, scrollTop, scrollHeight)
   }
 
@@ -192,7 +193,7 @@ const VirtualizedScroll: React.FC<any> = ({
                   ({ height, width }: any) => (
                   <VList
                       ref={(ref: any) => vListRef.current = ref}
-                      onScroll={onScrollCurrent}
+                      onScroll={onScrollCallback}
                       height={height}
                       width={width}
                       rowHeight={cache.rowHeight}
@@ -212,17 +213,17 @@ const VirtualizedScroll: React.FC<any> = ({
       <div className="list-box">
         <div className="pull-down-box" style={{
           top: `${offset - 45}px`,
-          transition: STATS === 'pull' ? 'none' : 'all .3s',
+          transition: STATS === 'dragging' ? 'none' : 'all .3s',
           zIndex: 999
         }}>
           <div className="pull-down-round">
             <div className="inner" style={{
               transform: `rotate(${(offset / refreshDistance) * 720}deg)`,
-              transition: STATS === 'refreshing' || STATS === 'pull' ? 'none' : 'all .3s',
+              transition: STATS === 'refreshing' || STATS === 'dragging' ? 'none' : 'all .3s',
               animation: STATS === 'refreshing' ? 'self_rotate 1s infinite linear' : ''
             }}>
               {
-                STATS === 'refreshed' || STATS === 'init' ? 
+                STATS === 'success' || STATS === 'init' ? 
                   logo.pulldown_success ? logo.pulldown_success : <i className="icon iconfont iconcheck-circle"></i> 
                  : logo.pulldown_loading ? logo.pulldown_loading : <i className="icon iconfont iconshuaxin"></i>
               }
