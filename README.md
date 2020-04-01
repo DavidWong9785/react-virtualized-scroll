@@ -14,7 +14,14 @@
 
 > cnpm i react-virtualized react-virtualized-scroll --save
 
-> import ReactVirtualizedScroll from 'react-virtualized-scroll'
+> import rsv from 'react-virtualized-scroll'
+```
+const { ReactVirtualizedScroll, useStateAndRef } = rsv
+
+useStateAndRef为一个包含ref的自定义hooks，用户可直接得到ref使用最新值
+示例：
+const [data, setData, dataRef] = useStateAndRef(initState)
+```
 
 ### 使用
 
