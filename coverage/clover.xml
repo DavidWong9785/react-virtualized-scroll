@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1585728507253" clover="3.2.0">
-  <project timestamp="1585728507253" name="All files">
+<coverage generated="1585728667345" clover="3.2.0">
+  <project timestamp="1585728667345" name="All files">
     <metrics statements="227" coveredstatements="100" conditionals="215" coveredconditionals="59" methods="48" coveredmethods="6" elements="490" coveredelements="165" complexity="0" loc="227" ncloc="227" packages="2" files="8" classes="8"/>
     <package name="lib.component.ReactVirtualizedScroll">
       <metrics statements="124" coveredstatements="50" conditionals="120" coveredconditionals="38" methods="26" coveredmethods="4"/>
