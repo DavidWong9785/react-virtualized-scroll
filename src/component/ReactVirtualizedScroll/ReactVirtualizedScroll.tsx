@@ -111,7 +111,7 @@ const VirtualizedScroll = ({
         if (!onPullDown) return
         onPullDown().then(() => {
           setSTATS('success')
-          vListRef.current.scrollToRow(0)
+          if (vListRef.current) vListRef.current.scrollToRow(0)
           if (timer.current) clearTimeout(timer.current)
           timer.current = setTimeout(() => {
             setSTATS('init')
@@ -140,7 +140,7 @@ const VirtualizedScroll = ({
       isPullUpLoading.current = true
       onPullUp().then(() => {
         isPullUpLoading.current = false
-        vListRef.current.scrollToRow(data.length + 1)
+        if (vListRef.current) vListRef.current.scrollToRow(data.length + 1)
       }).catch(() => {
         isPullUpLoading.current = false
       })
