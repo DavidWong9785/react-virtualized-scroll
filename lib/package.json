@@ -4,5 +4,15 @@
   "description": "虚拟滚动搭配上拉下滑加载的scroll组件",
   "main": "./component/ReactVirtualizedScroll/index.js",
   "author": "DavidWong <park_geunhye@163.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@types/react": "^16.8.20",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-router-dom": "^4.3.4",
+    "@types/react-virtualized": "^9.21.7",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
+    "react-virtualized": "^9.21.2"
+  }
 }
