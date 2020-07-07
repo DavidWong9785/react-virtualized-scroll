@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40.65% </span>
+                <span class="strong">44.44% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>50/123</span>
+                <span class='fraction'>60/135</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.11% </span>
+                <span class="strong">21.21% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>21/95</span>
+                <span class='fraction'>21/99</span>
             </div>
         
             
@@ -352,19 +352,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -602,7 +602,7 @@ interface IVirtualized {
   row({index, info}: {index: number, info: any, data: any}): any;
 }
 &nbsp;
-const Row = <span class="fstat-no" title="function not covered" >({</span> <span class="cstat-no" title="statement not covered" >row,</span> <span class="cstat-no" title="statement not covered" >data,</span> <span class="cstat-no" title="statement not covered" >index,</span> <span class="cstat-no" title="statement not covered" >info </span>}:any) =&gt; {
+const Row = <span class="fstat-no" title="function not covered" >({</span> row<span class="cstat-no" title="statement not covered" >, d</span>ata<span class="cstat-no" title="statement not covered" >, i</span>ndex<span class="cstat-no" title="statement not covered" >, i</span>nfo<span class="cstat-no" title="statement not covered" > }:any)</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >  return useMemo(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
 <span class="cstat-no" title="statement not covered" >      return row({ data: data, index, info })</span>
   }, [JSON.stringify(data[index])])
@@ -610,19 +610,19 @@ const Row = <span class="fstat-no" title="function not covered" >({</span> <span
 &nbsp;
 const VirtualizedScroll = ({
   children,
-<span class="branch-0 cbranch-no" title="branch not covered" >  hasMore = true,</span>
-<span class="branch-1 cbranch-no" title="branch not covered" >  refreshDistance = 120,</span>
-<span class="branch-1 cbranch-no" title="branch not covered" >  loading = false,</span>
-<span class="branch-1 cbranch-no" title="branch not covered" >  data = [],</span>
+  hasMore = <span class="branch-0 cbranch-no" title="branch not covered" >true,</span>
+  refreshDistance = 120<span class="branch-1 cbranch-no" title="branch not covered" >,</span>
+  loading = false<span class="branch-1 cbranch-no" title="branch not covered" >,</span>
+  data = []<span class="branch-1 cbranch-no" title="branch not covered" >,</span>
   info,
-<span class="branch-0 cbranch-no" title="branch not covered" >  height = '100vh',</span>
-<span class="branch-1 cbranch-no" title="branch not covered" >  width = '100vw',</span>
+  height = <span class="branch-0 cbranch-no" title="branch not covered" >'100vh',</span>
+  width = '100vw'<span class="branch-1 cbranch-no" title="branch not covered" >,</span>
   noDataRow,
-<span class="branch-1 cbranch-no" title="branch not covered" >  onPullDown = null,</span>
-<span class="branch-1 cbranch-no" title="branch not covered" >  onPullUp = null,</span>
-<span class="branch-1 cbranch-no" title="branch not covered" >  onScroll = null,</span>
+  onPullDown = null<span class="branch-1 cbranch-no" title="branch not covered" >,</span>
+  onPullUp = null<span class="branch-1 cbranch-no" title="branch not covered" >,</span>
+  onScroll = null<span class="branch-1 cbranch-no" title="branch not covered" >,</span>
   row,
-<span class="branch-1 cbranch-no" title="branch not covered" >  logo = {}</span>
+  logo = {}<span class="branch-1 cbranch-no" title="branch not covered" ></span>
 }: IVirtualized, ref: any) =&gt; {
 &nbsp;
   // 下拉状态
@@ -685,7 +685,7 @@ const VirtualizedScroll = ({
 <span class="cstat-no" title="statement not covered" >        if (!onPullDown) <span class="cstat-no" title="statement not covered" >return</span></span>
 <span class="cstat-no" title="statement not covered" >        onPullDown().then(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
 <span class="cstat-no" title="statement not covered" >          setSTATS('success')</span>
-<span class="cstat-no" title="statement not covered" >          vListRef.current.scrollToRow(0)</span>
+<span class="cstat-no" title="statement not covered" >          if (vListRef.current) <span class="cstat-no" title="statement not covered" >vListRef.current.scrollToRow(0)</span></span>
 <span class="cstat-no" title="statement not covered" >          if (timer.current) <span class="cstat-no" title="statement not covered" >clearTimeout(timer.current)</span></span>
 <span class="cstat-no" title="statement not covered" >          timer.current = setTimeout(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
 <span class="cstat-no" title="statement not covered" >            setSTATS('init')</span>
@@ -705,7 +705,7 @@ const VirtualizedScroll = ({
     [timer, STATS, canNotDrag],
   )
 &nbsp;
-  const onScrollCallback = <span class="fstat-no" title="function not covered" >({</span> <span class="cstat-no" title="statement not covered" >clientHeight,</span> <span class="cstat-no" title="statement not covered" >scrollTop,</span> <span class="cstat-no" title="statement not covered" >scrollHeight </span>}: any) =&gt; {
+  const onScrollCallback = <span class="fstat-no" title="function not covered" >({</span> clientHeight<span class="cstat-no" title="statement not covered" >, s</span>crollTop<span class="cstat-no" title="statement not covered" >, s</span>crollHeight<span class="cstat-no" title="statement not covered" > }: any)</span> =&gt; {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (scrollTop === 0) <span class="cstat-no" title="statement not covered" >scrollingDisable.current = false</span></span>
     else <span class="cstat-no" title="statement not covered" >scrollingDisable.current = true</span>
@@ -714,7 +714,7 @@ const VirtualizedScroll = ({
 <span class="cstat-no" title="statement not covered" >      isPullUpLoading.current = true</span>
 <span class="cstat-no" title="statement not covered" >      onPullUp().then(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
 <span class="cstat-no" title="statement not covered" >        isPullUpLoading.current = false</span>
-<span class="cstat-no" title="statement not covered" >        vListRef.current.scrollToRow(data.length + 1)</span>
+<span class="cstat-no" title="statement not covered" >        if (vListRef.current) <span class="cstat-no" title="statement not covered" >vListRef.current.scrollToRow(data.length + 1)</span></span>
       }).catch(<span class="fstat-no" title="function not covered" >() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        isPullUpLoading.current = false</span>
       })
@@ -733,7 +733,7 @@ const VirtualizedScroll = ({
   )
 &nbsp;
   const renderRow = useCallback(
-<span class="fstat-no" title="function not covered" >    ({</span> <span class="cstat-no" title="statement not covered" >index,</span> <span class="cstat-no" title="statement not covered" >key,</span> <span class="cstat-no" title="statement not covered" >parent,</span> <span class="cstat-no" title="statement not covered" >style </span>}: any) =&gt; {
+<span class="fstat-no" title="function not covered" >    ({</span> index<span class="cstat-no" title="statement not covered" >, k</span>ey<span class="cstat-no" title="statement not covered" >, p</span>arent<span class="cstat-no" title="statement not covered" >, s</span>tyle<span class="cstat-no" title="statement not covered" > }: any)</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >      return (</span>
         &lt;CellMeasurer
           cache={cache}
@@ -782,7 +782,7 @@ const VirtualizedScroll = ({
             (
 <span class="branch-1 cbranch-no" title="branch not covered" >                &lt;AutoSizer&gt;</span>
                 {
-<span class="fstat-no" title="function not covered" >                    ({</span> <span class="cstat-no" title="statement not covered" >height,</span> <span class="cstat-no" title="statement not covered" >width </span>}: any) =&gt; <span class="cstat-no" title="statement not covered" >(</span>
+<span class="fstat-no" title="function not covered" >                    ({</span> height<span class="cstat-no" title="statement not covered" >, w</span>idth<span class="cstat-no" title="statement not covered" > }: any)</span> =&gt; <span class="cstat-no" title="statement not covered" >(</span>
                     &lt;VList
                         ref={<span class="fstat-no" title="function not covered" >(r</span>ef: any) =&gt; <span class="cstat-no" title="statement not covered" >vListRef.current = ref}</span>
                         onScroll={onScrollCallback}
@@ -837,7 +837,7 @@ export default forwardRef(VirtualizedScroll);
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Apr 01 2020 16:12:25 GMT+0800 (GMT+08:00)
+                at Tue Jul 07 2020 19:12:04 GMT+0800 (GMT+08:00)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>
