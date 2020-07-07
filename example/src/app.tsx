@@ -57,7 +57,7 @@ const example = () => {
                         }
                         setData(data.concat(target))
                         resolve()
-                    }, 3000);
+                    }, 1000);
                 }
             })
         },
@@ -107,6 +107,7 @@ const example = () => {
         <div>
             <ReactVirtualizedScroll
                 onPullUp={handlePullUp}
+                onPullDown={handlePullDown}
                 hasMore={hasMore}
                 data={data}
                 row={Row}
