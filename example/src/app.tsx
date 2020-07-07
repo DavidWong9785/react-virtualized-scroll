@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react'
-import rvs from '../../lib/component/ReactVirtualizedScroll/index.js'
+/* tslint:disable */
+import React, { useState, useCallback } from 'react'
+import ReactVirtualizedScroll from '../../lib/component/ReactVirtualizedScroll/index.js'
+import useStateAndRef from './utils'
 // import ReactVirtualizedScroll from '../../src/component/ReactVirtualizedScroll/index.tsx'
 import { loading_pullup } from '../../src/component/ReactVirtualizedScroll/svg'
-
-const { ReactVirtualizedScroll, useStateAndRef } = rvs
 
 const initState = [{
     key: 1,

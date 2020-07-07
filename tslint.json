@@ -7,6 +7,6 @@
     "ordered-imports": false
   },
   "linterOptions": {
-    "exclude": ["**/*.json", "node_modules"]
+    "exclude": ["**/*.json", "node_modules", "./lib", "./example"]
   }
 }

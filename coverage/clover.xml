@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< Updated upstream
 <coverage generated="1594120500903" clover="3.2.0">
   <project timestamp="1594120500903" name="All files">
+=======
+<coverage generated="1591178000229" clover="3.2.0">
+  <project timestamp="1591178000229" name="All files">
+>>>>>>> Stashed changes
     <metrics statements="239" coveredstatements="107" conditionals="237" coveredconditionals="68" methods="53" coveredmethods="9" elements="529" coveredelements="184" complexity="0" loc="239" ncloc="239" packages="2" files="8" classes="8"/>
     <package name="lib.component.ReactVirtualizedScroll">
       <metrics statements="136" coveredstatements="57" conditionals="138" coveredconditionals="47" methods="31" coveredmethods="7"/>

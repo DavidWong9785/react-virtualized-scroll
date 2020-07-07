@@ -21,6 +21,6 @@
     "paths": { "*": ["types/*"] }
     // "suppressImplicitAnyIndexErrors": true, //阻止对缺少索引签名的索引对象报错
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "./lib", "./example"],
   "include": ["src/**/*"]
 }
